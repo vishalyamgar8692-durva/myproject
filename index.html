@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --border: #1e1e2e;
+      --accent: #6c63ff;
+      --accent2: #00d4aa;
+      --text: #e8e8f0;
+      --muted: #7a7a9a;
+      --card: #16161f;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 6%;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,15,0.9);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      padding: 7rem 6% 5rem;
+      max-width: 860px;
+    }
+    .eyebrow {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 1.2rem;
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 1.4rem;
+    }
+    h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      padding: 0.75rem 1.6rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #5a52e0; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* SKILLS */
+    .section { padding: 4rem 6%; }
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.75rem;
+    }
+    .skill-tag {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+      font-size: 0.85rem;
+      color: var(--text);
+      text-align: center;
+      font-weight: 500;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .skill-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.6rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .card-desc { font-size: 0.88rem; color: var(--muted); margin-bottom: 1.2rem; line-height: 1.6; }
+    .card-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .tag {
+      font-size: 0.72rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      background: rgba(108,99,255,0.12);
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* CONTACT */
+    .contact-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3rem;
+      max-width: 560px;
+    }
+    .contact-box h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    .contact-box p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.8rem; }
+    .contact-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 5%; }
+      .nav-links { gap: 1.2rem; }
+      .hero { padding: 4rem 5% 3rem; }
+      .section { padding: 3rem 5%; }
+      .contact-box { padding: 2rem 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">&lt;YourName /&gt;</div>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <p class="eyebrow">DevOps &amp; Cloud Engineer</p>
+    <h1>Building systems that<br/><span>scale and never sleep</span></h1>
+    <p class="hero-sub">I design, automate, and maintain cloud infrastructure — keeping deployments fast, reliable, and secure.</p>
+    <div class="btn-group">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="#contact" class="btn btn-outline">Contact Me</a>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <p class="section-label">Skills &amp; Tools</p>
+    <div class="skills-grid">
+      <div class="skill-tag">Linux</div>
+      <div class="skill-tag">AWS</div>
+      <div class="skill-tag">Docker</div>
+      <div class="skill-tag">Kubernetes</div>
+      <div class="skill-tag">Terraform</div>
+      <div class="skill-tag">Ansible</div>
+      <div class="skill-tag">Jenkins</div>
+      <div class="skill-tag">GitHub Actions</div>
+      <div class="skill-tag">Bash Scripting</div>
+      <div class="skill-tag">Nginx</div>
+      <div class="skill-tag">Prometheus</div>
+      <div class="skill-tag">Grafana</div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <p class="section-label">Projects</p>
+    <div class="projects-grid">
+      <div class="card">
+        <div class="card-title">CI/CD Pipeline Automation</div>
+        <div class="card-desc">End-to-end pipeline using Jenkins and GitHub Actions to automate build, test, and deployment on AWS EC2.</div>
+        <div class="card-tags">
+          <span class="tag">Jenkins</span>
+          <span class="tag">AWS EC2</span>
+          <span class="tag">Docker</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Kubernetes Cluster Setup</div>
+        <div class="card-desc">Deployed a production-grade K8s cluster on AWS with auto-scaling, ingress, and monitoring via Prometheus + Grafana.</div>
+        <div class="card-tags">
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Helm</span>
+          <span class="tag">Grafana</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Infrastructure as Code</div>
+        <div class="card-desc">Provisioned full AWS VPC, EC2, RDS, and S3 infrastructure using Terraform with remote state management.</div>
+        <div class="card-tags">
+          <span class="tag">Terraform</span>
+          <span class="tag">AWS</span>
+          <span class="tag">S3</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <p class="section-label">Get in Touch</p>
+    <div class="contact-box">
+      <h2>Let's work together</h2>
+      <p>Open to DevOps, Cloud, and infrastructure opportunities. Feel free to reach out.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:you@email.com">✉️ Email</a>
+        <a class="contact-link" href="https://github.com/yourusername" target="_blank">⌥ GitHub</a>
+        <a class="contact-link" href="https://linkedin.com/in/yourusername" target="_blank">in LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 YourName · Built with HTML, CSS &amp; hosted on Nginx
+  </footer>
+
+</body>
+</html>
